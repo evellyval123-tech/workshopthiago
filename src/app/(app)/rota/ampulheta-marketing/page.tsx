@@ -1,6 +1,7 @@
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Card } from "@/components/ui/Card";
 import { TextAreaField } from "@/components/fields/TextAreaField";
+import { AmpulhetaHourglass } from "@/components/sections/AmpulhetaHourglass";
 
 const ETAPAS = [
   {
@@ -37,6 +38,10 @@ export default function AmpulhetaMarketingPage() {
         title="Ampulheta do Marketing"
         description="Consciência → Desejo → Recompensa → Retenção → Engajamento → Recomendação."
       />
+
+      <Card className="mb-6">
+        <AmpulhetaHourglass />
+      </Card>
 
       <div className="space-y-6">
         {ETAPAS.map((etapa) => (

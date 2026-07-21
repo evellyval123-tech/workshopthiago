@@ -1,5 +1,6 @@
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Card } from "@/components/ui/Card";
+import { JornadaStaircase } from "@/components/sections/JornadaStaircase";
 
 const ETAPAS = [
   {
@@ -51,6 +52,10 @@ export default function JornadaComercialPage() {
         title="Jornada Comercial"
         description="O funil de 8 etapas que todo cliente percorre até fechar — e onde, na prática, o corretor mais perde venda."
       />
+
+      <Card className="mb-6">
+        <JornadaStaircase />
+      </Card>
 
       <div className="space-y-4">
         {ETAPAS.map((etapa, i) => (

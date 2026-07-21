@@ -1,5 +1,6 @@
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Card } from "@/components/ui/Card";
+import { EsforcoMetodoDiagram } from "@/components/sections/EsforcoMetodoDiagram";
 
 export default function InicioEssencialPage() {
   return (
@@ -7,8 +8,12 @@ export default function InicioEssencialPage() {
       <SectionHeader
         eyebrow="Início"
         title="O que é essencial no sucesso da venda?"
-        description="Método → Cliente → Produto. Nessa ordem."
+        description="Produto → Método → Cliente. Sem método no meio, a distância entre os dois vira esforço puro."
       />
+
+      <Card className="mb-6">
+        <EsforcoMetodoDiagram />
+      </Card>
 
       <Card>
         <h2 className="text-lg font-semibold text-foreground mb-3">O erro mais comum</h2>

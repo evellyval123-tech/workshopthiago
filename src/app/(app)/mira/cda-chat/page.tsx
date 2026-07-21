@@ -1,5 +1,6 @@
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Card } from "@/components/ui/Card";
+import { TecnologiaPilares } from "@/components/sections/TecnologiaPilares";
 
 export default function CdaChatPage() {
   return (
@@ -9,6 +10,10 @@ export default function CdaChatPage() {
         title="Tecnologia — CDA Chat"
         description="O corretor que usa tecnologia vai substituir o corretor que não usa. Aqui a tecnologia é o CRM que vive dentro do seu WhatsApp."
       />
+
+      <Card className="mb-6">
+        <TecnologiaPilares />
+      </Card>
 
       <div className="space-y-4">
         <Card>
