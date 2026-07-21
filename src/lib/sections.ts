@@ -186,14 +186,6 @@ export const SECTIONS: SectionDef[] = [
     hasForm: false,
     requiredKeys: [],
   },
-  {
-    id: "oferta",
-    cluster: "metodo",
-    title: "Oferta",
-    path: "/oferta",
-    hasForm: false,
-    requiredKeys: [],
-  },
 ];
 
 export function getSection(id: string): SectionDef | undefined {
