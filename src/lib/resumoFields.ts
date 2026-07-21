@@ -65,7 +65,16 @@ export function formatFieldValue(format: Format, value: unknown): string | null 
   return null;
 }
 
-type MetaLinha = { faturado?: number | null };
+type MetaLinha = {
+  eficacia?: number | null;
+  ticketMedio?: number | null;
+  alavanca?: number | null;
+};
+
+/** Vendido = Ticket Médio × Eficácia. Faturado = Vendido × Alavanca. */
+function faturadoDeLinha(l: MetaLinha): number {
+  return (l.ticketMedio ?? 0) * (l.eficacia ?? 0) * (l.alavanca ?? 0);
+}
 
 export function summarizeMetas(sectionAnswers: Record<string, unknown> | undefined): {
   metaIdeal: number;
@@ -74,7 +83,7 @@ export function summarizeMetas(sectionAnswers: Record<string, unknown> | undefin
   if (!sectionAnswers) return null;
   const metaIdeal = typeof sectionAnswers.meta_ideal === "number" ? sectionAnswers.meta_ideal : 0;
   const linhas = Array.isArray(sectionAnswers.linhas) ? (sectionAnswers.linhas as MetaLinha[]) : [];
-  const metaReal = linhas.reduce((sum, l) => sum + (l.faturado ?? 0), 0);
+  const metaReal = linhas.reduce((sum, l) => sum + faturadoDeLinha(l), 0);
   if (metaIdeal === 0 && metaReal === 0) return null;
   return { metaIdeal, metaReal };
 }

@@ -10,8 +10,8 @@ type Linha = {
   operadora: string;
   eficiencia: number | null;
   eficacia: number | null;
-  vendido: number | null;
-  faturado: number | null;
+  ticketMedio: number | null;
+  alavanca: number | null;
 };
 
 const LINHAS_PADRAO: Linha[] = [
@@ -24,17 +24,25 @@ const LINHAS_PADRAO: Linha[] = [
   operadora,
   eficiencia: null,
   eficacia: null,
-  vendido: null,
-  faturado: null,
+  ticketMedio: null,
+  alavanca: null,
 }));
 
 function formatBRL(value: number) {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
-function ratio(numerator: number, denominator: number): number | null {
-  if (!denominator) return null;
-  return numerator / denominator;
+function average(values: number[]): number {
+  if (values.length === 0) return 0;
+  return values.reduce((sum, v) => sum + v, 0) / values.length;
+}
+
+/** Vendido = Ticket Médio × Eficácia. Faturado = Vendido × Alavanca. */
+function vendidoDe(linha: Linha): number {
+  return (linha.ticketMedio ?? 0) * (linha.eficacia ?? 0);
+}
+function faturadoDe(linha: Linha): number {
+  return vendidoDe(linha) * (linha.alavanca ?? 0);
 }
 
 export function MetasTable() {
@@ -54,7 +62,10 @@ export function MetasTable() {
   function addLinha() {
     setLinhas((prev: unknown) => {
       const arr = Array.isArray(prev) ? (prev as Linha[]) : LINHAS_PADRAO;
-      return [...arr, { operadora: "", eficiencia: null, eficacia: null, vendido: null, faturado: null }];
+      return [
+        ...arr,
+        { operadora: "", eficiencia: null, eficacia: null, ticketMedio: null, alavanca: null },
+      ];
     });
   }
 
@@ -68,43 +79,100 @@ export function MetasTable() {
   const totais = useMemo(() => {
     const eficiencia = linhas.reduce((sum, l) => sum + (l.eficiencia ?? 0), 0);
     const eficacia = linhas.reduce((sum, l) => sum + (l.eficacia ?? 0), 0);
-    const vendido = linhas.reduce((sum, l) => sum + (l.vendido ?? 0), 0);
-    const faturado = linhas.reduce((sum, l) => sum + (l.faturado ?? 0), 0);
-    return { eficiencia, eficacia, vendido, faturado };
+    const ticketMedio = average(
+      linhas.map((l) => l.ticketMedio).filter((v): v is number => typeof v === "number")
+    );
+    const alavanca = average(
+      linhas.map((l) => l.alavanca).filter((v): v is number => typeof v === "number")
+    );
+    const vendido = ticketMedio * eficacia;
+    const faturado = vendido * alavanca;
+    return { eficiencia, eficacia, ticketMedio, alavanca, vendido, faturado };
   }, [linhas]);
 
-  const metaReal = totais.faturado;
+  const metaReal = linhas.reduce((sum, l) => sum + faturadoDe(l), 0);
   const metaAtingida = metaIdeal > 0 && metaReal >= metaIdeal;
 
   async function handleDownloadPdf() {
     const { jsPDF } = await import("jspdf");
+    const autoTable = (await import("jspdf-autotable")).default;
+
+    const BG: [number, number, number] = [7, 20, 15]; // --background
+    const SURFACE: [number, number, number] = [14, 36, 29]; // --surface
+    const BORDER: [number, number, number] = [23, 54, 42]; // --border
+    const FOREGROUND: [number, number, number] = [234, 246, 241]; // --foreground
+    const MUTED: [number, number, number] = [143, 179, 166]; // --muted
+    const ACCENT_BRIGHT: [number, number, number] = [0, 255, 196]; // --accent-bright
+
     const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
 
-    doc.setFontSize(18);
-    doc.text("Metas — Método A.R.M.", 20, 20);
+    doc.setFillColor(...BG);
+    doc.rect(0, 0, pageWidth, pageHeight, "F");
 
+    doc.setTextColor(...MUTED);
     doc.setFontSize(10);
-    let y = 34;
-    doc.text("Operadora / Eficiência / Eficácia / Ticket Médio / Alavanca / Vendido / Faturado", 20, y);
-    y += 8;
+    doc.text("CORRETORAS DO AMANHÃ", 14, 16);
 
-    linhas.forEach((l) => {
-      const ticketMedio = ratio(l.faturado ?? 0, l.eficacia ?? 0);
-      const alavanca = ratio(l.eficiencia ?? 0, l.eficacia ?? 0);
-      const linha = `${l.operadora || "-"} / ${l.eficiencia ?? 0} / ${l.eficacia ?? 0} / ${
-        ticketMedio !== null ? formatBRL(ticketMedio) : "-"
-      } / ${alavanca !== null ? alavanca.toFixed(1) : "-"} / ${formatBRL(l.vendido ?? 0)} / ${formatBRL(
-        l.faturado ?? 0
-      )}`;
-      doc.text(linha, 20, y);
-      y += 7;
+    doc.setTextColor(...FOREGROUND);
+    doc.setFontSize(20);
+    doc.text("Metas — Método A.R.M.", 14, 27);
+
+    autoTable(doc, {
+      startY: 34,
+      head: [["Operadora", "Eficiência", "Eficácia", "Ticket Médio", "Alavanca", "Vendido", "Faturado", "%"]],
+      body: linhas.map((l) => [
+        l.operadora || "-",
+        String(l.eficiencia ?? 0),
+        String(l.eficacia ?? 0),
+        formatBRL(l.ticketMedio ?? 0),
+        String(l.alavanca ?? 0),
+        formatBRL(vendidoDe(l)),
+        formatBRL(faturadoDe(l)),
+        metaIdeal > 0 ? `${((faturadoDe(l) / metaIdeal) * 100).toFixed(2)}%` : "—",
+      ]),
+      foot: [[
+        "TOTAL",
+        String(totais.eficiencia),
+        String(totais.eficacia),
+        formatBRL(totais.ticketMedio),
+        totais.alavanca.toFixed(1),
+        formatBRL(totais.vendido),
+        formatBRL(totais.faturado),
+        metaIdeal > 0 ? `${((totais.faturado / metaIdeal) * 100).toFixed(2)}%` : "—",
+      ]],
+      theme: "grid",
+      styles: {
+        fillColor: SURFACE,
+        textColor: FOREGROUND,
+        lineColor: BORDER,
+        lineWidth: 0.1,
+        fontSize: 9,
+      },
+      headStyles: { fillColor: BORDER, textColor: ACCENT_BRIGHT, fontStyle: "bold" },
+      footStyles: { fillColor: BORDER, textColor: ACCENT_BRIGHT, fontStyle: "bold" },
+      margin: { left: 14, right: 14 },
     });
 
-    y += 6;
-    doc.setFontSize(12);
-    doc.text(`Meta Ideal: ${formatBRL(metaIdeal)}`, 20, y);
-    y += 8;
-    doc.text(`Meta Real: ${formatBRL(metaReal)}`, 20, y);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const finalY = (doc as any).lastAutoTable.finalY + 14;
+
+    doc.setDrawColor(...BORDER);
+    doc.setFillColor(...SURFACE);
+    doc.roundedRect(14, finalY, pageWidth - 28, 26, 3, 3, "FD");
+
+    doc.setFontSize(10);
+    doc.setTextColor(...MUTED);
+    doc.text("META IDEAL", 22, finalY + 10);
+    doc.text("META REAL", pageWidth / 2 + 8, finalY + 10);
+
+    doc.setFontSize(14);
+    doc.setTextColor(...FOREGROUND);
+    doc.text(formatBRL(metaIdeal), 22, finalY + 19);
+    const RED: [number, number, number] = [248, 113, 113];
+    doc.setTextColor(...(metaAtingida ? ACCENT_BRIGHT : RED));
+    doc.text(formatBRL(metaReal), pageWidth / 2 + 8, finalY + 19);
 
     doc.save("metas-metodo-arm.pdf");
   }
@@ -113,7 +181,7 @@ export function MetasTable() {
     <div className="space-y-6">
       <Card>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm min-w-[800px]">
+          <table className="w-full text-sm min-w-[860px]">
             <thead>
               <tr className="text-left text-xs text-muted uppercase tracking-wide border-b border-border">
                 <th className="py-2 pr-3">Operadora</th>
@@ -121,17 +189,17 @@ export function MetasTable() {
                 <th className="py-2 pr-3">Eficácia</th>
                 <th className="py-2 pr-3">Ticket Médio</th>
                 <th className="py-2 pr-3">Alavanca</th>
-                <th className="py-2 pr-3">Vendido (R$)</th>
-                <th className="py-2 pr-3">Faturado (R$)</th>
+                <th className="py-2 pr-3">Vendido</th>
+                <th className="py-2 pr-3">Faturado</th>
                 <th className="py-2 pr-3">Porcentagem</th>
                 <th className="py-2" />
               </tr>
             </thead>
             <tbody>
               {linhas.map((linha, i) => {
-                const ticketMedio = ratio(linha.faturado ?? 0, linha.eficacia ?? 0);
-                const alavanca = ratio(linha.eficiencia ?? 0, linha.eficacia ?? 0);
-                const porcentagem = metaIdeal > 0 ? ((linha.faturado ?? 0) / metaIdeal) * 100 : null;
+                const vendido = vendidoDe(linha);
+                const faturado = faturadoDe(linha);
+                const porcentagem = metaIdeal > 0 ? (faturado / metaIdeal) * 100 : null;
 
                 return (
                   <tr key={i} className="border-b border-border/60">
@@ -168,19 +236,13 @@ export function MetasTable() {
                         className="w-20 bg-background border border-border rounded-lg px-2 py-1.5 text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
                       />
                     </td>
-                    <td className="py-2 pr-3 text-muted">
-                      {ticketMedio !== null ? formatBRL(ticketMedio) : "—"}
-                    </td>
-                    <td className="py-2 pr-3 text-muted">
-                      {alavanca !== null ? alavanca.toFixed(1) : "—"}
-                    </td>
                     <td className="py-2 pr-3">
                       <input
                         type="number"
-                        value={linha.vendido ?? ""}
+                        value={linha.ticketMedio ?? ""}
                         onChange={(e) =>
                           updateLinha(i, {
-                            vendido: e.target.value === "" ? null : Number(e.target.value),
+                            ticketMedio: e.target.value === "" ? null : Number(e.target.value),
                           })
                         }
                         className="w-24 bg-background border border-border rounded-lg px-2 py-1.5 text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
@@ -189,15 +251,17 @@ export function MetasTable() {
                     <td className="py-2 pr-3">
                       <input
                         type="number"
-                        value={linha.faturado ?? ""}
+                        value={linha.alavanca ?? ""}
                         onChange={(e) =>
                           updateLinha(i, {
-                            faturado: e.target.value === "" ? null : Number(e.target.value),
+                            alavanca: e.target.value === "" ? null : Number(e.target.value),
                           })
                         }
-                        className="w-24 bg-background border border-border rounded-lg px-2 py-1.5 text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                        className="w-20 bg-background border border-border rounded-lg px-2 py-1.5 text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
                       />
                     </td>
+                    <td className="py-2 pr-3 text-muted">{formatBRL(vendido)}</td>
+                    <td className="py-2 pr-3 text-muted">{formatBRL(faturado)}</td>
                     <td className="py-2 pr-3 text-muted">
                       {porcentagem !== null ? `${porcentagem.toFixed(2)}%` : "—"}
                     </td>
@@ -217,16 +281,8 @@ export function MetasTable() {
                 <td className="py-2 pr-3">TOTAL</td>
                 <td className="py-2 pr-3">{totais.eficiencia}</td>
                 <td className="py-2 pr-3">{totais.eficacia}</td>
-                <td className="py-2 pr-3 text-muted">
-                  {ratio(totais.faturado, totais.eficacia) !== null
-                    ? formatBRL(ratio(totais.faturado, totais.eficacia)!)
-                    : "—"}
-                </td>
-                <td className="py-2 pr-3 text-muted">
-                  {ratio(totais.eficiencia, totais.eficacia) !== null
-                    ? ratio(totais.eficiencia, totais.eficacia)!.toFixed(1)
-                    : "—"}
-                </td>
+                <td className="py-2 pr-3 text-muted">{formatBRL(totais.ticketMedio)}</td>
+                <td className="py-2 pr-3 text-muted">{totais.alavanca.toFixed(1)}</td>
                 <td className="py-2 pr-3">{formatBRL(totais.vendido)}</td>
                 <td className="py-2 pr-3">{formatBRL(totais.faturado)}</td>
                 <td className="py-2 pr-3">
