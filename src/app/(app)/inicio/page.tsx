@@ -1,14 +1,10 @@
-import { SectionHeader } from "@/components/ui/SectionHeader";
+import { CoverHero } from "@/components/sections/CoverHero";
 import { Card } from "@/components/ui/Card";
 
 export default function InicioAberturaPage() {
   return (
     <div>
-      <SectionHeader
-        eyebrow="Início"
-        title="A Máquina de Vender Planos"
-        description="Se você não sabe o que faz pra vender, você não sabe vender."
-      />
+      <CoverHero />
 
       <Card>
         <h2 className="text-lg font-semibold text-foreground mb-3">Por que isso importa</h2>
