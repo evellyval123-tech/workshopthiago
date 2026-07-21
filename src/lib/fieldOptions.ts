@@ -5,32 +5,49 @@ export const NICHOS = [
   { value: "grandes_contas", label: "Grandes Contas" },
 ];
 
-export const MOMENTOS = [
-  { value: "primeira_vez", label: "Contratando pela 1ª vez" },
-  { value: "trocando", label: "Trocando de plano" },
-  { value: "perdendo_empresarial", label: "Perdendo o plano empresarial" },
-  { value: "reajuste", label: "Insatisfeito com reajuste" },
+export const CLIENTE_MOMENTOS = [
+  { value: "decide_sozinho", label: "Decide sozinho" },
+  { value: "precisa_aprovacao", label: "Precisa aprovação de outra pessoa" },
+  { value: "problema_operadora", label: "Já teve problema com a operadora atual" },
+  { value: "trocando_corretor", label: "Está trocando de corretor" },
 ];
 
 export const CANAIS = [
-  { value: "indicacao", label: "Indicação" },
-  { value: "redes_sociais", label: "Redes sociais" },
   { value: "trafego_pago", label: "Tráfego pago" },
-  { value: "prospeccao_ativa", label: "Prospecção ativa" },
-  { value: "carteira", label: "Carteira/base atual" },
-  { value: "parcerias", label: "Parcerias" },
+  { value: "indicacao_ativa", label: "Indicação ativa" },
+  { value: "parcerias", label: "Parcerias (contadores/RH)" },
+  { value: "linkedin", label: "LinkedIn" },
+  { value: "nenhum_estruturado", label: "Nenhum estruturado" },
+];
+
+export const ROTINA_BLOCOS = [
+  { value: "prospeccao", label: "Prospecção" },
+  { value: "tratamento_leads", label: "Tratamento de leads" },
+  { value: "relacionamento_indicacao", label: "Relacionamento-indicação" },
+  { value: "revisao_resultados", label: "Revisão de resultados" },
+];
+
+export const CADENCIA_AUTOMATIZA = [
+  { value: "agendo_antecedencia", label: "Agendo com antecedência" },
+  { value: "lembro_na_hora", label: "Lembro na hora, quando dá" },
+  { value: "sem_estrutura", label: "Não faço follow-up estruturado" },
 ];
 
 export const METRICAS = [
-  { value: "leads_gerados", label: "Leads gerados" },
   { value: "taxa_conversao", label: "Taxa de conversão" },
-  { value: "ticket_medio", label: "Ticket médio" },
-  { value: "no_show", label: "Taxa de no-show" },
-  { value: "indicacoes", label: "Indicações recebidas" },
-  { value: "nenhuma", label: "Não acompanho nenhuma métrica hoje" },
+  { value: "tempo_medio_fechamento", label: "Tempo médio de fechamento" },
+  { value: "valor_em_negociacao", label: "Valor total em negociação" },
+  { value: "nenhuma_estruturada", label: "Nenhuma métrica estruturada" },
 ];
 
-const ALL_OPTIONS = [...NICHOS, ...MOMENTOS, ...CANAIS, ...METRICAS];
+const ALL_OPTIONS = [
+  ...NICHOS,
+  ...CLIENTE_MOMENTOS,
+  ...CANAIS,
+  ...ROTINA_BLOCOS,
+  ...CADENCIA_AUTOMATIZA,
+  ...METRICAS,
+];
 
 const LABEL_BY_VALUE = new Map(ALL_OPTIONS.map((opt) => [opt.value, opt.label]));
 

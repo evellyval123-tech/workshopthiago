@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { CLUSTER_LABELS, sectionsByCluster, type Cluster } from "@/lib/sections";
+import { CLUSTER_DIVIDERS, CLUSTER_LABELS, sectionsByCluster, type Cluster } from "@/lib/sections";
 import { useProgresso } from "@/context/ProgressoContext";
 import { createClient } from "@/lib/supabase/client";
 
@@ -28,11 +28,23 @@ export function Sidebar({ userEmail }: { userEmail: string }) {
       </div>
 
       <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-6">
-        {CLUSTER_ORDER.map((cluster) => (
+        {CLUSTER_ORDER.map((cluster) => {
+          const divider = CLUSTER_DIVIDERS[cluster];
+          return (
           <div key={cluster}>
-            <p className="px-2 mb-2 text-xs font-semibold tracking-widest uppercase text-muted">
-              {CLUSTER_LABELS[cluster]}
-            </p>
+            {divider ? (
+              <div className="flex items-center gap-2 px-2 mb-2">
+                <span className="h-px flex-1 bg-border" aria-hidden />
+                <p className="text-[11px] font-semibold tracking-widest uppercase text-accent-bright whitespace-nowrap">
+                  {divider}
+                </p>
+                <span className="h-px flex-1 bg-border" aria-hidden />
+              </div>
+            ) : (
+              <p className="px-2 mb-2 text-xs font-semibold tracking-widest uppercase text-muted">
+                {CLUSTER_LABELS[cluster]}
+              </p>
+            )}
             <ul className="space-y-1">
               {sectionsByCluster(cluster).map((section) => {
                 const active = pathname === section.path;
@@ -60,7 +72,8 @@ export function Sidebar({ userEmail }: { userEmail: string }) {
               })}
             </ul>
           </div>
-        ))}
+          );
+        })}
       </nav>
 
       <div className="px-6 py-4 border-t border-border">

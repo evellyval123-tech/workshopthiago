@@ -4,7 +4,11 @@ import Link from "next/link";
 import { useProgresso } from "@/context/ProgressoContext";
 import { Card } from "@/components/ui/Card";
 import { CLUSTER_LABELS, sectionsByCluster, type Cluster } from "@/lib/sections";
-import { RESUMO_FIELDS, formatFieldValue } from "@/lib/resumoFields";
+import { RESUMO_FIELDS, formatFieldValue, summarizeMetas } from "@/lib/resumoFields";
+
+function formatBRL(value: number) {
+  return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+}
 
 const PILARES: Cluster[] = ["alvo", "rota", "mira"];
 
@@ -24,9 +28,48 @@ export function ResumoMetodo() {
 
             <div className="space-y-4">
               {sections.map((section) => {
-                const fields = RESUMO_FIELDS[section.id] ?? [];
                 const sectionAnswers = answers[section.id] ?? {};
 
+                if (section.id === "alvo-metas") {
+                  const metas = summarizeMetas(sectionAnswers);
+                  return (
+                    <Card key={section.id}>
+                      <div className="flex items-center justify-between mb-3">
+                        <p className="font-semibold text-foreground">{section.title}</p>
+                        <Link
+                          href={section.path}
+                          className="text-xs text-muted hover:text-accent-bright transition-colors"
+                        >
+                          Editar
+                        </Link>
+                      </div>
+                      {!metas ? (
+                        <p className="text-sm text-muted italic">Ainda não respondido.</p>
+                      ) : (
+                        <dl className="space-y-2">
+                          <div>
+                            <dt className="text-xs text-muted uppercase tracking-wide">
+                              Meta Ideal
+                            </dt>
+                            <dd className="text-sm text-foreground/90">
+                              {formatBRL(metas.metaIdeal)}
+                            </dd>
+                          </div>
+                          <div>
+                            <dt className="text-xs text-muted uppercase tracking-wide">
+                              Meta Real
+                            </dt>
+                            <dd className="text-sm text-foreground/90">
+                              {formatBRL(metas.metaReal)}
+                            </dd>
+                          </div>
+                        </dl>
+                      )}
+                    </Card>
+                  );
+                }
+
+                const fields = RESUMO_FIELDS[section.id] ?? [];
                 const rows = fields
                   .map((f) => ({
                     label: f.label,

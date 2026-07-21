@@ -19,14 +19,45 @@ export const CLUSTER_LABELS: Record<Cluster, string> = {
   metodo: "Seu Método",
 };
 
+/** Texto do divisor exibido na sidebar, acima de cada pilar (Alvo/Rota/Mira). */
+export const CLUSTER_DIVIDERS: Partial<Record<Cluster, string>> = {
+  alvo: "Definindo o ALVO",
+  rota: "Traçando a ROTA",
+  mira: "Calibrando a MIRA",
+};
+
 export const SECTIONS: SectionDef[] = [
   {
-    id: "inicio",
+    id: "inicio-abertura",
     cluster: "inicio",
     title: "A Máquina de Vender Planos",
     path: "/inicio",
+    hasForm: false,
+    requiredKeys: [],
+  },
+  {
+    id: "inicio-essencial",
+    cluster: "inicio",
+    title: "O que é essencial no sucesso da venda?",
+    path: "/inicio/essencial",
+    hasForm: false,
+    requiredKeys: [],
+  },
+  {
+    id: "inicio-metodo-arm",
+    cluster: "inicio",
+    title: "O Método A.R.M.",
+    path: "/inicio/metodo-arm",
+    hasForm: false,
+    requiredKeys: [],
+  },
+  {
+    id: "inicio-dor",
+    cluster: "inicio",
+    title: "Qual é a sua maior dor vendendo planos hoje?",
+    path: "/inicio/dor",
     hasForm: true,
-    requiredKeys: ["maior_dor"],
+    requiredKeys: ["dor_principal"],
   },
   {
     id: "alvo-posicionamento",
@@ -34,7 +65,7 @@ export const SECTIONS: SectionDef[] = [
     title: "Posicionamento",
     path: "/alvo/posicionamento",
     hasForm: true,
-    requiredKeys: ["posicionamento"],
+    requiredKeys: ["identidade"],
   },
   {
     id: "alvo-produtos",
@@ -50,7 +81,7 @@ export const SECTIONS: SectionDef[] = [
     title: "Cliente Ideal",
     path: "/alvo/cliente-ideal",
     hasForm: true,
-    requiredKeys: ["dor_regiao", "momento_decisao"],
+    requiredKeys: ["cliente_dor_regiao", "cliente_momento"],
   },
   {
     id: "alvo-metas",
@@ -58,7 +89,7 @@ export const SECTIONS: SectionDef[] = [
     title: "Metas",
     path: "/alvo/metas",
     hasForm: true,
-    requiredKeys: ["faturamento_meta", "ticket_medio", "taxa_fechamento"],
+    requiredKeys: ["meta_ideal"],
   },
   {
     id: "rota-jornada",
@@ -74,7 +105,7 @@ export const SECTIONS: SectionDef[] = [
     title: "Geração de Demanda",
     path: "/rota/geracao-demanda",
     hasForm: true,
-    requiredKeys: ["canais_hoje", "gargalo_funil", "acao_indicacao"],
+    requiredKeys: ["canais_hoje", "gargalo_funil", "indicacao_hoje"],
   },
   {
     id: "rota-ampulheta",
@@ -83,12 +114,12 @@ export const SECTIONS: SectionDef[] = [
     path: "/rota/ampulheta-marketing",
     hasForm: true,
     requiredKeys: [
-      "consciencia",
-      "desejo",
-      "recompensa",
-      "retencao",
-      "engajamento",
-      "recomendacao",
+      "amp_consciencia",
+      "amp_desejo",
+      "amp_recompensa",
+      "amp_retencao",
+      "amp_engajamento",
+      "amp_recomendacao",
     ],
   },
   {
@@ -97,7 +128,7 @@ export const SECTIONS: SectionDef[] = [
     title: "Rotina do Trabalho Diário",
     path: "/rota/rotina-diaria",
     hasForm: true,
-    requiredKeys: ["rotina_atual"],
+    requiredKeys: ["rotina_hoje", "rotina_bloco_falta"],
   },
   {
     id: "rota-cadencia",
@@ -105,7 +136,7 @@ export const SECTIONS: SectionDef[] = [
     title: "Cadência de Contatos",
     path: "/rota/cadencia-contatos",
     hasForm: true,
-    requiredKeys: ["cadencia_atual"],
+    requiredKeys: ["cadencia_hoje", "cadencia_automatiza"],
   },
   {
     id: "mira-cda-chat",
@@ -134,10 +165,10 @@ export const SECTIONS: SectionDef[] = [
   {
     id: "mira-medicao",
     cluster: "mira",
-    title: "Medição de Resultados",
+    title: "Medição dos Resultados",
     path: "/mira/medicao-resultados",
     hasForm: true,
-    requiredKeys: ["metricas_hoje", "mudanca_por_numero"],
+    requiredKeys: ["metricas_hoje", "metrica_decisao"],
   },
   {
     id: "mira-movimento",

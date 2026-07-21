@@ -8,15 +8,15 @@ export default function ProdutosPage() {
     <div>
       <SectionHeader
         eyebrow="Alvo"
-        title="Produtos"
-        description="Em qual nicho de plano de saúde você concentra a sua venda?"
+        title="Produtos — crie nichos pra vender mais"
+        description="A maioria dos corretores vende pra “todo mundo que aparecer” — e isso é o que mais mata a conversão."
       />
 
       <Card>
         <CheckboxGroupField
           sectionId="alvo-produtos"
           fieldKey="nichos"
-          label="Selecione um ou mais nichos"
+          label="Quais nichos te dão o melhor resultado hoje?"
           options={NICHOS}
         />
       </Card>

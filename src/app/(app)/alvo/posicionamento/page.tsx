@@ -8,15 +8,15 @@ export default function PosicionamentoPage() {
       <SectionHeader
         eyebrow="Alvo"
         title="Posicionamento"
-        description="A identidade e o diferencial que fazem alguém escolher você em vez de qualquer outro corretor."
+        description="Segurança vem do que você transmite: clareza, consistência e condução."
       />
 
       <Card>
         <TextAreaField
           sectionId="alvo-posicionamento"
-          fieldKey="posicionamento"
-          label="Como você se posiciona no mercado? O que te torna diferente?"
-          placeholder="Ex: sou o corretor especialista em famílias que estão saindo do plano empresarial e precisam de um individual sem perder cobertura."
+          fieldKey="identidade"
+          label="Qual a sua identidade? Por que fecham com você e não com o concorrente ou direto na operadora?"
+          placeholder="Descreva o que te diferencia de verdade."
           rows={6}
         />
       </Card>

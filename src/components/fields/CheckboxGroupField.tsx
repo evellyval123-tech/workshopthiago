@@ -17,10 +17,12 @@ export function CheckboxGroupField({
   const selected: string[] = Array.isArray(value) ? value : [];
 
   function toggle(optionValue: string) {
-    const next = selected.includes(optionValue)
-      ? selected.filter((v) => v !== optionValue)
-      : [...selected, optionValue];
-    setValue(next);
+    setValue((prev: unknown) => {
+      const arr: string[] = Array.isArray(prev) ? prev : [];
+      return arr.includes(optionValue)
+        ? arr.filter((v) => v !== optionValue)
+        : [...arr, optionValue];
+    });
   }
 
   return (

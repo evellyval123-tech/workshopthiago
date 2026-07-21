@@ -1,15 +1,15 @@
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { MetasForm } from "@/components/sections/MetasForm";
+import { MetasTable } from "@/components/sections/MetasTable";
 
 export default function MetasPage() {
   return (
     <div>
       <SectionHeader
         eyebrow="Alvo"
-        title="Metas"
-        description="A partir do seu ticket médio e da sua taxa de fechamento, calculamos exatamente quantas vendas e leads você precisa por mês."
+        title="Metas — controle seus resultados"
+        description="Preencha por operadora pra ver sua meta calculada automaticamente. Você pode baixar essa aba em PDF no final."
       />
-      <MetasForm />
+      <MetasTable />
     </div>
   );
 }

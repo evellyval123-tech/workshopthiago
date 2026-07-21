@@ -4,34 +4,28 @@ import { TextAreaField } from "@/components/fields/TextAreaField";
 
 const ETAPAS = [
   {
-    key: "consciencia",
-    label: "Consciência",
-    placeholder: "Como as pessoas descobrem que você existe?",
+    key: "amp_consciencia",
+    label: "Consciência: como as pessoas descobrem que você existe?",
   },
   {
-    key: "desejo",
-    label: "Desejo",
-    placeholder: "O que faz alguém querer falar com você especificamente?",
+    key: "amp_desejo",
+    label: "Desejo: por que elas quereriam falar com você, e não com outro corretor?",
   },
   {
-    key: "recompensa",
-    label: "Recompensa",
-    placeholder: "O que o cliente sente que ganhou ao fechar com você?",
+    key: "amp_recompensa",
+    label: "Recompensa: o que acontece quando elas fecham com você?",
   },
   {
-    key: "retencao",
-    label: "Retenção",
-    placeholder: "O que você faz pra manter esse cliente satisfeito depois da venda?",
+    key: "amp_retencao",
+    label: "Retenção: o que você faz pra manter o cliente satisfeito depois da venda?",
   },
   {
-    key: "engajamento",
-    label: "Engajamento",
-    placeholder: "Como você mantém contato com quem já é cliente?",
+    key: "amp_engajamento",
+    label: "Engajamento: como você mantém contato ao longo do ano (não só na renovação)?",
   },
   {
-    key: "recomendacao",
-    label: "Recomendação",
-    placeholder: "Como você pede (ou facilita) a indicação?",
+    key: "amp_recomendacao",
+    label: "Recomendação: o que faz um cliente te indicar pra alguém?",
   },
 ];
 
@@ -41,7 +35,7 @@ export default function AmpulhetaMarketingPage() {
       <SectionHeader
         eyebrow="Rota"
         title="Ampulheta do Marketing"
-        description="Uma pergunta por etapa — da primeira vez que alguém ouve falar de você até o momento em que ele te indica pra outra pessoa."
+        description="Consciência → Desejo → Recompensa → Retenção → Engajamento → Recomendação."
       />
 
       <div className="space-y-6">
@@ -51,7 +45,6 @@ export default function AmpulhetaMarketingPage() {
               sectionId="rota-ampulheta"
               fieldKey={etapa.key}
               label={etapa.label}
-              placeholder={etapa.placeholder}
               rows={3}
             />
           </Card>

@@ -14,10 +14,12 @@ import { isSectionComplete, SECTIONS, type SectionDef } from "@/lib/sections";
 
 type Answers = Record<string, Record<string, unknown>>;
 
+type ValueOrUpdater = unknown | ((prev: unknown) => unknown);
+
 type ProgressoContextValue = {
   answers: Answers;
   getField: (sectionId: string, fieldKey: string) => unknown;
-  setField: (sectionId: string, fieldKey: string, value: unknown) => void;
+  setField: (sectionId: string, fieldKey: string, value: ValueOrUpdater) => void;
   isComplete: (section: SectionDef) => boolean;
   saving: boolean;
 };
@@ -56,11 +58,15 @@ export function ProgressoProvider({
   }, [supabase, userId]);
 
   const setField = useCallback(
-    (sectionId: string, fieldKey: string, value: unknown) => {
+    (sectionId: string, fieldKey: string, value: ValueOrUpdater) => {
       setAnswers((prev) => {
+        const resolved =
+          typeof value === "function"
+            ? (value as (p: unknown) => unknown)(prev[sectionId]?.[fieldKey])
+            : value;
         const next: Answers = {
           ...prev,
-          [sectionId]: { ...prev[sectionId], [fieldKey]: value },
+          [sectionId]: { ...prev[sectionId], [fieldKey]: resolved },
         };
         pendingAnswers.current = next;
         return next;
@@ -100,7 +106,7 @@ export function useSectionField(sectionId: string, fieldKey: string) {
   const { getField, setField } = useProgresso();
   const value = getField(sectionId, fieldKey);
   const setValue = useCallback(
-    (v: unknown) => setField(sectionId, fieldKey, v),
+    (v: ValueOrUpdater) => setField(sectionId, fieldKey, v),
     [setField, sectionId, fieldKey]
   );
   return [value, setValue] as const;

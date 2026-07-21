@@ -4,35 +4,42 @@ import { Card } from "@/components/ui/Card";
 const ETAPAS = [
   {
     nome: "Base",
-    descricao: "Sua carteira de contatos e clientes atuais — o ponto de partida de tudo.",
+    descricao:
+      "Sua carteira atual e sua lista de contatos frios. É daqui que sai boa parte da indicação, se você trabalhar isso de propósito.",
   },
   {
     nome: "Prospecção",
-    descricao: "Busca ativa por novos contatos que ainda não sabem que precisam de você.",
+    descricao:
+      "Primeiro contato com quem ainda não te conhece — via tráfego, indicação ou parceria.",
   },
   {
     nome: "Conexão",
-    descricao: "Primeiro contato real — criar rapport antes de qualquer oferta.",
+    descricao:
+      "O lead responde e a conversa começa. Aqui a velocidade de resposta já decide metade da venda.",
   },
   {
     nome: "No-Show",
-    descricao: "Tratamento de quem marcou e não apareceu — recuperar, não descartar.",
+    descricao:
+      "Reunião marcada e o cliente não aparece. Ter uma cadência de recontato pronta evita perder o lead de vez.",
   },
   {
     nome: "Reunião",
-    descricao: "Diagnóstico da dor e do momento do cliente, cara a cara.",
+    descricao:
+      "Levantamento de necessidade de verdade: número de vidas, orçamento, o que já tem hoje e por que está insatisfeito.",
   },
   {
     nome: "Proposta",
-    descricao: "Apresentação do plano certo pra dor identificada na reunião.",
+    descricao:
+      "Cotação personalizada — não a tabela genérica da operadora, mas a que responde à dor que ele te contou.",
   },
   {
     nome: "Negociação",
-    descricao: "Ajustes finos de condição, sem abrir mão do posicionamento.",
+    descricao: "Contornar objeções de preço e prazo sem virar guerra de desconto.",
   },
   {
     nome: "Fechamento",
-    descricao: "Confirmação da venda e início do relacionamento pós-venda.",
+    descricao:
+      "Assinatura e, principalmente, o início do pós-venda — é aqui que nasce a próxima indicação.",
   },
 ];
 
@@ -42,7 +49,7 @@ export default function JornadaComercialPage() {
       <SectionHeader
         eyebrow="Rota"
         title="Jornada Comercial"
-        description="As 8 etapas que todo cliente percorre até fechar com você."
+        description="O funil de 8 etapas que todo cliente percorre até fechar — e onde, na prática, o corretor mais perde venda."
       />
 
       <div className="space-y-4">

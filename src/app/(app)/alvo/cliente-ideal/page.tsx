@@ -2,24 +2,24 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Card } from "@/components/ui/Card";
 import { TextAreaField } from "@/components/fields/TextAreaField";
 import { RadioGroupField } from "@/components/fields/RadioGroupField";
-import { MOMENTOS } from "@/lib/fieldOptions";
+import { CLIENTE_MOMENTOS } from "@/lib/fieldOptions";
 
 export default function ClienteIdealPage() {
   return (
     <div>
       <SectionHeader
         eyebrow="Alvo"
-        title="Cliente Ideal"
-        description="Quem é a pessoa que seu método atende melhor?"
+        title="Cliente Ideal — pra quem você vende?"
+        description="Público-alvo → Persona → Cliente Ideal. Quanto mais fundo, menos energia desperdiçada com lead errado."
       />
 
       <div className="space-y-6">
         <Card>
           <TextAreaField
             sectionId="alvo-cliente-ideal"
-            fieldKey="dor_regiao"
-            label="Qual a principal dor do seu cliente ideal e em qual região ele está?"
-            placeholder="Ex: famílias em bairros de classe média em SP preocupadas com o custo crescente do plano..."
+            fieldKey="cliente_dor_regiao"
+            label="Dor + região: qual problema você resolve, e onde?"
+            placeholder="Ex: famílias que perderam o plano empresarial, na zona sul de SP..."
             rows={5}
           />
         </Card>
@@ -27,9 +27,9 @@ export default function ClienteIdealPage() {
         <Card>
           <RadioGroupField
             sectionId="alvo-cliente-ideal"
-            fieldKey="momento_decisao"
-            label="Em que momento ele decide contratar?"
-            options={MOMENTOS}
+            fieldKey="cliente_momento"
+            label="Seu cliente ideal hoje..."
+            options={CLIENTE_MOMENTOS}
           />
         </Card>
       </div>
