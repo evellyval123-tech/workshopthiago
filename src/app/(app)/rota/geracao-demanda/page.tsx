@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/Card";
 import { CheckboxGroupField } from "@/components/fields/CheckboxGroupField";
 import { TextAreaField } from "@/components/fields/TextAreaField";
 import { CANAIS } from "@/lib/fieldOptions";
+import { FlywheelDiagram } from "@/components/sections/FlywheelDiagram";
 
 export default function GeracaoDemandaPage() {
   return (
@@ -15,10 +16,11 @@ export default function GeracaoDemandaPage() {
 
       <div className="space-y-6">
         <Card>
-          <h2 className="text-lg font-semibold text-foreground mb-3">
+          <h2 className="text-lg font-semibold text-foreground mb-4">
             O Flywheel do Sistema de Indicação
           </h2>
-          <p className="text-muted leading-relaxed">
+          <FlywheelDiagram />
+          <p className="text-muted leading-relaxed mt-6">
             Três pessoas, um ciclo que se autoalimenta: o <strong className="text-foreground">Corretor</strong> atende
             um <strong className="text-foreground">Lead</strong> que chegou através de um{" "}
             <strong className="text-foreground">Indicador</strong>. Se esse atendimento for bom,
