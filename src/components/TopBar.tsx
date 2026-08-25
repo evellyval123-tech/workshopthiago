@@ -109,7 +109,25 @@ export function TopBar({ userEmail, onExpand }: { userEmail: string; onExpand: (
                 })}
               </div>
 
-              <p className="mt-6 pt-4 border-t border-border text-xs text-muted truncate">
+              <div className="mt-6 pt-4 border-t border-border">
+                <p className="mb-2 text-[11px] font-semibold tracking-widest uppercase text-accent-bright">
+                  Extra
+                </p>
+                <Link
+                  href="/slido"
+                  onClick={() => setMenuOpen(false)}
+                  className={`inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors ${
+                    pathname === "/slido"
+                      ? "bg-accent/15 text-accent-bright"
+                      : "text-foreground/80 hover:bg-surface-hover"
+                  }`}
+                >
+                  <span className="h-1.5 w-1.5 rounded-full shrink-0 bg-border" aria-hidden />
+                  <span className="truncate">Slido</span>
+                </Link>
+              </div>
+
+              <p className="mt-4 pt-4 border-t border-border text-xs text-muted truncate">
                 {userEmail}
               </p>
             </div>
