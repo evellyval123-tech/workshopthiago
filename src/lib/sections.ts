@@ -171,6 +171,14 @@ export const SECTIONS: SectionDef[] = [
     requiredKeys: [],
   },
   {
+    id: "mira-oferta",
+    cluster: "mira",
+    title: "Oferta",
+    path: "/mira/oferta",
+    hasForm: false,
+    requiredKeys: [],
+  },
+  {
     id: "metodo-resumo",
     cluster: "metodo",
     title: "Seu Método A.R.M.",
