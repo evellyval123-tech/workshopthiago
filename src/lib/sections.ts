@@ -139,14 +139,6 @@ export const SECTIONS: SectionDef[] = [
     requiredKeys: ["cadencia_hoje", "cadencia_automatiza"],
   },
   {
-    id: "mira-cda-chat",
-    cluster: "mira",
-    title: "Tecnologia — CDA Chat",
-    path: "/mira/cda-chat",
-    hasForm: false,
-    requiredKeys: [],
-  },
-  {
     id: "mira-agente",
     cluster: "mira",
     title: "Automação — Agente do Amanhã",
