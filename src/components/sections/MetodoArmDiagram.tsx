@@ -123,9 +123,12 @@ export function MetodoArmDiagram() {
       </div>
 
       <div className="flex flex-col sm:flex-row items-stretch gap-6 sm:gap-0">
-        {PILARES.map((pilar, i) => (
-          <div key={pilar.titulo} className="flex items-center flex-1">
-            <div className="flex-1 rounded-2xl border border-accent-bright/30 bg-background/60 px-6 py-8 flex flex-col items-center text-center">
+        {PILARES.flatMap((pilar, i) => {
+          const card = (
+            <div
+              key={pilar.titulo}
+              className="flex-1 basis-0 rounded-2xl border border-accent-bright/30 bg-background/60 px-6 py-8 flex flex-col items-center text-center"
+            >
               <IconRing>
                 <pilar.Icon />
               </IconRing>
@@ -135,23 +138,30 @@ export function MetodoArmDiagram() {
               <span className="h-px w-8 bg-accent-bright/50 mb-3" />
               <p className="text-sm text-muted max-w-[220px]">{pilar.descricao}</p>
             </div>
+          );
 
-            {i < PILARES.length - 1 && (
-              <div className="hidden sm:flex items-center px-3 text-accent-bright shrink-0">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent-bright mr-1" />
-                <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
-                  <path
-                    d="M4 12h14M13 6l6 6-6 6"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-            )}
-          </div>
-        ))}
+          if (i === PILARES.length - 1) return [card];
+
+          const arrow = (
+            <div
+              key={`arrow-${pilar.titulo}`}
+              className="hidden sm:flex items-center px-3 text-accent-bright shrink-0"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-bright mr-1" />
+              <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+                <path
+                  d="M4 12h14M13 6l6 6-6 6"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+          );
+
+          return [card, arrow];
+        })}
       </div>
 
       <div className="mt-8 flex justify-center">
