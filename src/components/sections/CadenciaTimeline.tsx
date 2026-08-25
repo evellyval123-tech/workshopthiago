@@ -56,9 +56,8 @@ export function CadenciaTimeline() {
             Um padrão simples de follow-up
           </p>
           <p className="text-muted leading-relaxed">
-            3 tentativas: a primeira mensagem no mesmo dia, a segunda 1 dia depois, a terceira 2 a
-            3 dias depois. Cada uma com um motivo diferente pra escrever, não é só &ldquo;oi,
-            tudo bem?&rdquo; de novo.
+            Cada tentativa tem um motivo diferente pra escrever, não é só &ldquo;oi, tudo
+            bem?&rdquo; de novo.
           </p>
         </div>
       </div>
