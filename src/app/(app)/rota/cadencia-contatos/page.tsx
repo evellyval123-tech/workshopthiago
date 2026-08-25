@@ -11,7 +11,7 @@ export default function CadenciaContatosPage() {
       <SectionHeader
         eyebrow="Rota"
         title="Cadência de Contatos"
-        description="Lead que não recebe follow-up não vira venda — ele só esfria. Cadência é decidir, antes, quantas vezes e quando você vai insistir."
+        description="Lead que não recebe follow-up esfria e some. Cadência é decidir, antes, quantas vezes e quando você vai insistir."
       />
 
       <div className="space-y-6">

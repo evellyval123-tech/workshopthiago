@@ -117,7 +117,7 @@ export function MetodoArmDiagram() {
           <span className="text-accent-bright">.</span>
         </h1>
         <p className="text-muted mt-4 max-w-xl mx-auto">
-          <strong className="text-foreground">Alvo, Rota e Mira</strong> — o raciocínio por trás
+          <strong className="text-foreground">Alvo, Rota e Mira</strong>: o raciocínio por trás
           de todo corretor que vende com consistência.
         </p>
       </div>

@@ -11,7 +11,7 @@ const ETAPAS = [
   {
     nome: "Prospecção",
     descricao:
-      "Primeiro contato com quem ainda não te conhece — via tráfego, indicação ou parceria.",
+      "Primeiro contato com quem ainda não te conhece, via tráfego, indicação ou parceria.",
   },
   {
     nome: "Conexão",
@@ -31,7 +31,7 @@ const ETAPAS = [
   {
     nome: "Proposta",
     descricao:
-      "Cotação personalizada — não a tabela genérica da operadora, mas a que responde à dor que ele te contou.",
+      "Uma cotação personalizada, que responde à dor que ele te contou, não a tabela genérica da operadora.",
   },
   {
     nome: "Negociação",
@@ -40,7 +40,7 @@ const ETAPAS = [
   {
     nome: "Fechamento",
     descricao:
-      "Assinatura e, principalmente, o início do pós-venda — é aqui que nasce a próxima indicação.",
+      "Assinatura e, principalmente, o início do pós-venda: a próxima indicação nasce aqui.",
   },
 ];
 
@@ -50,7 +50,7 @@ export default function JornadaComercialPage() {
       <SectionHeader
         eyebrow="Rota"
         title="Jornada Comercial"
-        description="O funil de 8 etapas que todo cliente percorre até fechar — e onde, na prática, o corretor mais perde venda."
+        description="O funil de 8 etapas que todo cliente percorre até fechar, e onde, na prática, o corretor mais perde venda."
       />
 
       <Card className="mb-6">

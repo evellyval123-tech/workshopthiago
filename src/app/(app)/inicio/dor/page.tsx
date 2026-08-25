@@ -8,7 +8,7 @@ export default function InicioDorPage() {
       <SectionHeader
         eyebrow="Início"
         title="Qual é a sua maior dor vendendo planos hoje?"
-        description="Responda com sinceridade — isso vira o ponto de partida do seu método."
+        description="Responda com sinceridade. Isso vira o ponto de partida do seu método."
       />
 
       <Card>

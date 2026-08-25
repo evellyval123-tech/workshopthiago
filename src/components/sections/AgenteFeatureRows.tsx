@@ -66,14 +66,14 @@ const ETAPAS = [
     Icon: FlowchartIcon,
     titulo: "Como funciona na prática",
     descricao:
-      "O lead chega, a IA conversa, pergunta o que precisa saber (número de vidas, idade, o que busca) e já organiza tudo — você entra só pra fazer a cotação e fechar.",
+      "O lead chega, a IA conversa e pergunta o que precisa saber (número de vidas, idade, o que busca). Você entra só pra fazer a cotação e fechar.",
   },
   {
     n: "03",
     Icon: HandCheckIcon,
     titulo: "Quando você quiser assumir",
     descricao:
-      "Basta você entrar na conversa manualmente que o atendimento automático para na hora — o controle continua sendo seu.",
+      "Basta você entrar na conversa manualmente que o atendimento automático para na hora. O controle é seu.",
   },
 ];
 

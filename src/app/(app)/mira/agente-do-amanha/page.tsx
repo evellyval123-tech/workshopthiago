@@ -7,7 +7,7 @@ export default function AgenteDoAmanhaPage() {
       <SectionHeader
         eyebrow="Mira"
         title="Automação — Agente do Amanhã"
-        description="Automação não é sobre substituir você — é sobre garantir que nenhum lead espere."
+        description="Nenhum lead deveria esperar você abrir o WhatsApp. A automação garante isso, 24 horas por dia."
       />
 
       <AgenteFeatureRows />

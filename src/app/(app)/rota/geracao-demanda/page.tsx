@@ -24,7 +24,7 @@ export default function GeracaoDemandaPage() {
             Três pessoas, um ciclo que se autoalimenta: o <strong className="text-foreground">Corretor</strong> atende
             um <strong className="text-foreground">Lead</strong> que chegou através de um{" "}
             <strong className="text-foreground">Indicador</strong>. Se esse atendimento for bom,
-            o Lead vira cliente — e o cliente satisfeito vira o próximo Indicador. O corretor não
+            o Lead vira cliente, e o cliente satisfeito vira o próximo Indicador. O corretor não
             precisa gerar demanda do zero toda semana: ele estrutura o ciclo pra que a própria
             carteira produza os próximos leads.
           </p>
@@ -37,7 +37,7 @@ export default function GeracaoDemandaPage() {
           <p className="text-muted leading-relaxed">
             Corretor pede indicação de forma genérica (&ldquo;me indica alguém aí&rdquo;) e não
             acompanha quem indicou nem recompensa quem trouxe um lead bom. Sem registro, sem
-            recompensa, o ciclo não gira sozinho — depende da sorte.
+            recompensa, o ciclo não gira sozinho. Fica na sorte.
           </p>
         </Card>
 

@@ -8,7 +8,7 @@ export default function ProdutosPage() {
       <SectionHeader
         eyebrow="Alvo"
         title="Produtos — crie nichos pra vender mais"
-        description="A maioria dos corretores vende pra “todo mundo que aparecer” — e isso é o que mais mata a conversão."
+        description="A maioria dos corretores vende pra “todo mundo que aparecer”, e isso é o que mais mata a conversão."
       />
 
       <Card>

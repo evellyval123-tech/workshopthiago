@@ -11,7 +11,7 @@ export default function RotinaDiariaPage() {
       <SectionHeader
         eyebrow="Rota"
         title="Rotina do Trabalho Diário"
-        description="Método sem rotina é intenção. A diferença entre corretor que cresce e corretor que estagna geralmente está no que ele faz entre 8h e 18h, todo dia — não só quando “dá vontade”."
+        description="Método sem rotina é intenção. A diferença entre corretor que cresce e corretor que estagna geralmente está no que ele faz entre 8h e 18h, todo dia, não só quando “dá vontade”."
       />
 
       <div className="space-y-6">
