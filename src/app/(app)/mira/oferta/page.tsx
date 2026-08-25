@@ -3,21 +3,19 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 const ITENS = [
   {
     nome: "Agente do Amanhã",
-    descricao: "IA direta no teu WhatsApp",
-    preco: "R$ 997,00",
-    periodo: "ANUAL",
+    descricao: "IA de atendimento direto no teu WhatsApp",
   },
   {
-    nome: "Indicação 4.0",
+    nome: "Indicador do Amanhã",
     descricao: "Controle das indicações",
-    preco: "R$ 997,00",
-    periodo: "ANUAL",
   },
   {
-    nome: "WhatsApp Prime",
-    descricao: "WhatsApp Web turbinado",
-    preco: "R$ 997,00",
-    periodo: "ANUAL",
+    nome: "CDA Chat",
+    descricao: "Extensão que integra CRM, funil e follow-up automático no seu WhatsApp Web",
+  },
+  {
+    nome: "Mentoria mensal",
+    descricao: "Encontro mensal pra revisar sua aplicação do método e destravar o que não anda",
   },
 ];
 
@@ -34,16 +32,12 @@ export default function OfertaPage() {
           >
             <p className="font-display font-bold text-foreground sm:w-48 shrink-0">{item.nome}</p>
             <p className="text-muted flex-1">{item.descricao}</p>
-            <div className="text-right sm:w-36 shrink-0">
-              <p className="font-display font-bold text-lg text-foreground">{item.preco}</p>
-              <p className="text-xs tracking-widest text-muted">{item.periodo}</p>
-            </div>
           </div>
         ))}
       </div>
 
-      <p className="text-center font-semibold text-foreground mt-8">
-        Para os primeiros 20 inscritos
+      <p className="text-center font-display font-bold text-xl text-foreground mt-8">
+        6x R$ 97,00 para os primeiros 20 inscritos
       </p>
     </div>
   );
