@@ -30,6 +30,18 @@ export default function GeracaoDemandaPage() {
           </p>
         </Card>
 
+        <p className="text-sm text-muted">
+          <span className="font-semibold text-foreground">Link:</span>{" "}
+          <a
+            href="https://indica-amanha.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent-bright hover:underline"
+          >
+            Indicador do Amanhã
+          </a>
+        </p>
+
         <Card>
           <h2 className="text-lg font-semibold text-foreground mb-3">
             Por que a maioria não faz isso de propósito
