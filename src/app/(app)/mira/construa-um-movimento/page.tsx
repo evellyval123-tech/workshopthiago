@@ -1,22 +1,26 @@
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Card } from "@/components/ui/Card";
+import Image from "next/image";
 
 export default function ConstruaUmMovimentoPage() {
   return (
-    <div>
-      <SectionHeader
-        eyebrow="Mira"
-        title="Construa um Movimento"
-        description="Encontre uma causa. Construa uma narrativa. Lute contra um inimigo. Apresente um herói."
-      />
+    <div className="space-y-6">
+      <div className="relative w-full aspect-[1536/1024] rounded-2xl overflow-hidden border border-border">
+        <Image
+          src="/img/construa-um-movimento.png"
+          alt="Construa um Movimento — Encontre uma causa, construa uma narrativa, lute contra um inimigo, apresente um herói."
+          fill
+          priority
+          className="object-cover"
+        />
+      </div>
 
-      <Card>
-        <p className="font-semibold text-foreground mb-1">Sua causa</p>
-        <p className="text-sm text-muted">
-          Corretor que vende plano de saúde não vende apólice — vende proteção pra família do
-          cliente.
-        </p>
-      </Card>
+      <div className="relative w-full aspect-[1358/761] rounded-2xl overflow-hidden border border-border">
+        <Image
+          src="/img/thiago-eugenio-colagem.jpeg"
+          alt="Colagem de fotos de Thiago Eugênio — Corretoras do Amanhã"
+          fill
+          className="object-cover"
+        />
+      </div>
     </div>
   );
 }
