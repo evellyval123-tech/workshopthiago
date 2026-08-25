@@ -78,10 +78,10 @@ export function Sidebar({
               </p>
             )}
             <ul className="space-y-1">
-              {sectionsByCluster(cluster).map((section) => {
+              {sectionsByCluster(cluster).flatMap((section) => {
                 const active = pathname === section.path;
                 const done = section.hasForm && isComplete(section);
-                return (
+                const item = (
                   <li key={section.id}>
                     <Link
                       href={section.path}
@@ -101,32 +101,32 @@ export function Sidebar({
                     </Link>
                   </li>
                 );
+
+                if (section.id === "inicio-metodo-arm") {
+                  return [
+                    item,
+                    <li key="slido">
+                      <Link
+                        href="/slido"
+                        className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors ${
+                          pathname === "/slido"
+                            ? "bg-accent/15 text-accent-bright"
+                            : "text-foreground/80 hover:bg-surface-hover"
+                        }`}
+                      >
+                        <span className="h-1.5 w-1.5 rounded-full shrink-0 bg-border" aria-hidden />
+                        <span className="truncate">Slido</span>
+                      </Link>
+                    </li>,
+                  ];
+                }
+
+                return [item];
               })}
             </ul>
           </div>
           );
         })}
-
-        <div>
-          <p className="px-2 mb-2 text-xs font-semibold tracking-widest uppercase text-muted">
-            Extra
-          </p>
-          <ul className="space-y-1">
-            <li>
-              <Link
-                href="/slido"
-                className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors ${
-                  pathname === "/slido"
-                    ? "bg-accent/15 text-accent-bright"
-                    : "text-foreground/80 hover:bg-surface-hover"
-                }`}
-              >
-                <span className="h-1.5 w-1.5 rounded-full shrink-0 bg-border" aria-hidden />
-                <span className="truncate">Slido</span>
-              </Link>
-            </li>
-          </ul>
-        </div>
       </nav>
 
       <div className="px-6 py-4 border-t border-border">
