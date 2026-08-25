@@ -8,7 +8,29 @@ import { createClient } from "@/lib/supabase/client";
 
 const CLUSTER_ORDER: Cluster[] = ["inicio", "alvo", "rota", "mira", "metodo"];
 
-export function Sidebar({ userEmail }: { userEmail: string }) {
+function CollapseIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+      <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" strokeWidth={1.5} />
+      <path d="M9 4v16" stroke="currentColor" strokeWidth={1.5} />
+      <path
+        d="M6.2 10l-1.7 2 1.7 2"
+        stroke="currentColor"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function Sidebar({
+  userEmail,
+  onCollapse,
+}: {
+  userEmail: string;
+  onCollapse: () => void;
+}) {
   const pathname = usePathname();
   const { isComplete } = useProgresso();
   const router = useRouter();
@@ -22,9 +44,19 @@ export function Sidebar({ userEmail }: { userEmail: string }) {
 
   return (
     <aside className="w-72 shrink-0 h-screen sticky top-0 border-r border-border bg-surface/40 flex flex-col">
-      <div className="px-6 py-6 border-b border-border">
-        <p className="font-display font-bold text-lg text-foreground">Método A.R.M.</p>
-        <p className="text-xs text-muted mt-1">Corretoras do Amanhã</p>
+      <div className="px-6 py-6 border-b border-border flex items-start justify-between gap-2">
+        <div>
+          <p className="font-display font-bold text-lg text-foreground">Método A.R.M.</p>
+          <p className="text-xs text-muted mt-1">Corretoras do Amanhã</p>
+        </div>
+        <button
+          onClick={onCollapse}
+          className="shrink-0 rounded-lg p-1.5 text-muted hover:text-foreground hover:bg-surface-hover transition-colors"
+          aria-label="Recolher menu"
+          title="Recolher menu"
+        >
+          <CollapseIcon />
+        </button>
       </div>
 
       <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-6">
