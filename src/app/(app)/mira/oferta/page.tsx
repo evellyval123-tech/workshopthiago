@@ -37,7 +37,7 @@ export default function OfertaPage() {
       </div>
 
       <p className="text-center font-display font-bold text-xl text-foreground mt-8">
-        6x R$ 97,00 para os primeiros 20 inscritos
+        6 meses por R$ 97,00 o mês, para os primeiros 20 inscritos
       </p>
     </div>
   );
