@@ -1,7 +1,6 @@
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Card } from "@/components/ui/Card";
-import { CheckboxGroupField } from "@/components/fields/CheckboxGroupField";
-import { NICHOS } from "@/lib/fieldOptions";
+import { NichoIconGrid } from "@/components/sections/NichoIconGrid";
 
 export default function ProdutosPage() {
   return (
@@ -13,12 +12,7 @@ export default function ProdutosPage() {
       />
 
       <Card>
-        <CheckboxGroupField
-          sectionId="alvo-produtos"
-          fieldKey="nichos"
-          label="Quais nichos te dão o melhor resultado hoje?"
-          options={NICHOS}
-        />
+        <NichoIconGrid />
       </Card>
     </div>
   );
