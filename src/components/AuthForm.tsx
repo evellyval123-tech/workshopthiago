@@ -75,6 +75,14 @@ export function AuthForm({ mode }: { mode: "login" | "cadastro" }) {
             />
           </label>
 
+          {mode === "login" && (
+            <p className="text-right -mt-2">
+              <Link href="/esqueci-senha" className="text-sm text-accent-bright hover:underline">
+                Esqueci minha senha
+              </Link>
+            </p>
+          )}
+
           {error && <p className="text-sm text-red-400">{error}</p>}
 
           <button
