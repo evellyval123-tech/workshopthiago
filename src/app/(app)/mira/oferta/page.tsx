@@ -15,7 +15,7 @@ const ITENS = [
   },
   {
     nome: "Mentoria mensal",
-    descricao: "Encontro mensal pra revisar sua aplicação do método e destravar o que não anda",
+    descricao: "Encontro mensal pra revisar sua aplicação do método e destravar o próximo nível",
   },
 ];
 
