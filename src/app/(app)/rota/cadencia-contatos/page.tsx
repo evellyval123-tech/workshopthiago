@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/Card";
 import { TextAreaField } from "@/components/fields/TextAreaField";
 import { RadioGroupField } from "@/components/fields/RadioGroupField";
 import { CADENCIA_AUTOMATIZA } from "@/lib/fieldOptions";
+import { CadenciaTimeline } from "@/components/sections/CadenciaTimeline";
 
 export default function CadenciaContatosPage() {
   return (
@@ -14,30 +15,7 @@ export default function CadenciaContatosPage() {
       />
 
       <div className="space-y-6">
-        <Card>
-          <h2 className="text-lg font-semibold text-foreground mb-3">
-            Um padrão simples de follow-up
-          </h2>
-          <p className="text-muted leading-relaxed mb-4">
-            3 tentativas: a primeira mensagem no mesmo dia, a segunda 1 dia depois, a terceira 2 a
-            3 dias depois. Cada uma com um motivo diferente pra escrever — não é só &ldquo;oi,
-            tudo bem?&rdquo; de novo.
-          </p>
-          <div className="grid sm:grid-cols-3 gap-4">
-            <div className="rounded-xl bg-background border border-border p-4">
-              <p className="text-accent-bright font-display font-bold mb-1">1ª tentativa</p>
-              <p className="text-sm text-muted">No mesmo dia do contato inicial</p>
-            </div>
-            <div className="rounded-xl bg-background border border-border p-4">
-              <p className="text-accent-bright font-display font-bold mb-1">2ª tentativa</p>
-              <p className="text-sm text-muted">1 dia depois</p>
-            </div>
-            <div className="rounded-xl bg-background border border-border p-4">
-              <p className="text-accent-bright font-display font-bold mb-1">3ª tentativa</p>
-              <p className="text-sm text-muted">2 a 3 dias depois</p>
-            </div>
-          </div>
-        </Card>
+        <CadenciaTimeline />
 
         <Card>
           <TextAreaField
